@@ -6,15 +6,18 @@ public class UndoManager {
 	private ArrayList<Command> undoStack = new ArrayList<Command>();
 	private ArrayList<Command> redoStack = new ArrayList<Command>();
 	
-//	private MainActivity mContext = null;
-	
 	private static UndoManager mUndoManager = null;
 //	private String TAG = "UndoManager";
 	
 	private UndoManager() {
-//		mContext = (MainActivity) context;
+		//Do any initializations here if required.
 	}
 	
+	/**
+	 * Returns the instance of undo manager
+	 * @return
+	 * UndoManager Object
+	 */
 	public static UndoManager getInstance() {
 		if(mUndoManager == null) {
 			mUndoManager = new UndoManager();
@@ -22,6 +25,9 @@ public class UndoManager {
 		return mUndoManager;
 	}
 	
+	/**
+	 * Performs undo on the topmost item in the undo stack
+	 */
 	public void undo() {
 		if (undoStack.size() > 0) {
 			Command command = undoStack.remove(undoStack.size() - 1);
@@ -40,6 +46,20 @@ public class UndoManager {
 		
 //		Log.d(TAG  , "undoStack length: " + undoStack.size());
 //		Log.d(TAG  , "redoStack length: " + redoStack.size());
+	}
+	
+	public boolean isUndoAvailable() {
+		if(undoStack.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isRedoAvailable() {
+		if(redoStack.size() > 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void addToUndoStack(Command command) {
