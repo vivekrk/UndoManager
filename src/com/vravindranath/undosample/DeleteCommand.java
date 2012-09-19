@@ -25,6 +25,7 @@ public class DeleteCommand implements Command {
 		} else {
 			mContext.getItemsArray().remove(mItem);
 			mUndoManager.addToUndoStack(this);
+			mUndoManager.resetRedoStack();
 		}
 	}
 

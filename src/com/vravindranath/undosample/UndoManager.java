@@ -29,7 +29,7 @@ public class UndoManager {
 	 * Performs undo on the topmost item in the undo stack
 	 */
 	public void undo() {
-		if (undoStack.size() > 0) {
+		if (isUndoAvailable()) {
 			Command command = undoStack.remove(undoStack.size() - 1);
 			command.execute(Command.UNDO);
 		}
@@ -39,13 +39,17 @@ public class UndoManager {
 	}
 	
 	public void redo() {
-		if (redoStack.size() > 0) {
+		if (isRedoAvailable()) {
 			Command command = redoStack.remove(redoStack.size() - 1);
 			command.execute(Command.REDO);
 		}
 		
 //		Log.d(TAG  , "undoStack length: " + undoStack.size());
 //		Log.d(TAG  , "redoStack length: " + redoStack.size());
+	}
+	
+	public void resetRedoStack() {
+		redoStack.clear();
 	}
 	
 	public boolean isUndoAvailable() {

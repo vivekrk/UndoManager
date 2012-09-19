@@ -27,6 +27,7 @@ public class AddCommand implements Command{
 		} else {
 			mContext.getItemsArray().add(mItem);
 			mUndoManager.addToUndoStack(this);
+			mUndoManager.resetRedoStack();
 		}
 	}
 
